@@ -47,6 +47,15 @@ function getCombatItem(character) {
     return character.combatItem = item;
 }
 
+function getTurboBuff(character) {
+    let random = Math.random();
+
+    if (random > 0.5) {
+        console.log(`${character.NOME} achou um item de turbo e recebeu um ponto!`);
+        character.PONTOS++;
+    }
+}
+
 function logRollResult(characterName, block, diceResult, attribute) {
     console.log(`${characterName} 🎲 rolou um dado de ${block} ${diceResult} + ${attribute} = ${diceResult + attribute}`);
 }
@@ -55,6 +64,8 @@ function calcCombatResult(character1, character2, powerResult1, powerResult2) {
     if (powerResult1 > powerResult2) {
         console.log(`${character1.NOME} venceu o confronto! 🥊👑`);
         
+        getTurboBuff(character1);
+
         switch(true) {
             case character1.combatItem === 'Casco':
                 character2.PONTOS > 0 ? character2.PONTOS-- : console.log(`${character2.NOME} não tem mais pontos para perder`);
@@ -71,6 +82,8 @@ function calcCombatResult(character1, character2, powerResult1, powerResult2) {
         }
     } else if (powerResult2 > powerResult1) {
         console.log(`${character2.NOME} venceu o confronto! 🥊👑`);
+
+        getTurboBuff(character2);
 
         switch(true) {
             case character2.combatItem === 'Casco':
