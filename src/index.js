@@ -52,25 +52,17 @@ function logRollResult(characterName, block, diceResult, attribute) {
 }
 
 function calcCombatResult(character1, character2, powerResult1, powerResult2) {
-    let pontosPosDerrota = 0;
-
     if (powerResult1 > powerResult2) {
         console.log(`${character1.NOME} venceu o confronto! 🥊👑`);
-
-        pontosPosDerrota = character2.PONTOS;
         
         switch(true) {
             case character1.combatItem === 'Casco':
-                pontosPosDerrota--;
-
-                pontosPosDerrota > 0 ? character2.PONTOS-- : console.log(`${character2.NOME} não tem mais pontos para perder`);
+                character2.PONTOS > 0 ? character2.PONTOS-- : console.log(`${character2.NOME} não tem mais pontos para perder`);
                 break;
             case character1.combatItem === 'Bomba':
-                pontosPosDerrota -= 2;
-
-                if(pontosPosDerrota === 1 ) {
-                    character2.PONTOS -= 0;
-                } else if (pontosPosDerrota > 1 ) {
+                if(character2.PONTOS === 1 ) {
+                    character2.PONTOS = 0;
+                } else if (character2.PONTOS > 1 ) {
                     character2.PONTOS -= 2;
                 } else {
                     console.log(`${character2.NOME} não tem mais pontos para perder`);
@@ -79,22 +71,17 @@ function calcCombatResult(character1, character2, powerResult1, powerResult2) {
         }
     } else if (powerResult2 > powerResult1) {
         console.log(`${character2.NOME} venceu o confronto! 🥊👑`);
-        
-        pontosPosDerrota = character1.PONTOS;
 
         switch(true) {
             case character2.combatItem === 'Casco':
-                pontosPosDerrota--;
-                
-                pontosPosDerrota > 0 ? character1.PONTOS-- : console.log(`${character1.NOME} não tem mais pontos para perder`);
+                character1.PONTOS > 0 ? character1.PONTOS-- : console.log(`${character1.NOME} não tem mais pontos para perder`);
                 break;
 
             case character2.combatItem === 'Bomba':
-                pontosPosDerrota -= 2
 
-                if(pontosPosDerrota === 1) {
+                if(character1.PONTOS === 1) {
                     character1.PONTOS = 0;
-                } else if (pontosPosDerrota > 1) {
+                } else if (character1.PONTOS > 1) {
                     character1.PONTOS -= 2;
                 } else {
                     console.log(`${character1.NOME} não tem mais pontos para perder`);
